@@ -1,4 +1,4 @@
-import '../../function/operations.dart';
+import 'package:swip/Interpreter/function/operations.dart';
 import 'package:swip/Interpreter/function/extractValue.dart';
 String repl(String line) {
   if (line.contains("Math")) {

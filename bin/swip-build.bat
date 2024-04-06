@@ -1,1 +1,1 @@
-dart compile exe "%~dp0/Swip/bin/CLI/CLI.dart" -o "%~dp0/Swip/bin/Swip.exe"
+dart compile exe "%~dp0/Swip/bin/swip.dart" -o "%~dp0/swip.exe"

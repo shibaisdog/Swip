@@ -18,17 +18,17 @@ print(b)
 ---
 ### 02 함수지정하기
 ```
-fun <함수명>(매개변수)
+fun <함수명>(매개변수) {
     실행할코드
-end()
+}
 ```
 ---
 예시입력
 ```
-fun add(a,b)
+fun add(a,b) {
     print(a)
     print(b)
-end()
+}
 add(5,1)
 add(8,2)
 ```
@@ -38,6 +38,42 @@ add(8,2)
 1
 8
 2
+```
+---
+### 02-1 @override
+```
+fun <함수명>(매개변수) {
+    @override
+    실행할코드
+}
+```
+---
+예시입력
+```
+fun run_0() {
+    a = 12
+    b = 12
+}
+fun run_1() {
+    @override
+    a = 12
+    b = 12
+}
+
+run_0()
+print(a)
+print(b)
+
+run_1()
+print(a)
+print(b)
+```
+출력
+```
+null
+null
+12
+12
 ```
 ---
 ### 03 포맷팅

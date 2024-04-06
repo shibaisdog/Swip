@@ -1,6 +1,8 @@
 import 'package:swip/Interpreter/controller.dart' as contr;
+import 'package:swip/Heap/Heap.dart' as Heap;
 import 'package:swip/Heap/Class/Function-Heap.dart' as F_Heap;
 import 'package:swip/Interpreter/function/function.dart' as F_FUNS;
+import 'package:swip/Interpreter/function/override.dart' as override;
 class Memory {
   static List<List<dynamic>> VM_var = [];
 }
@@ -44,6 +46,12 @@ dynamic run(String target,List<String> doing_args) {
         F_FUNS.Memory.runing_n = valueBeforeDeleted;
       } else {}
     }
+    try {
+      if (override.override_ck(target)) {
+        Heap.Memory.VM_var = add(Heap.Memory.VM_var,removeLastElement(F_Heap.Memory.VM_var));
+        F_FUNS.Memory.override.remove(target);
+      }
+    } catch (error) {}
     F_Heap.Memory.resetByFunName(target);
   } else {
     return null;
@@ -51,4 +59,27 @@ dynamic run(String target,List<String> doing_args) {
 }
 int _getIndex(String target) {
   return Memory.VM_var.indexWhere((element) => element[0] == target);
+}
+List<List<dynamic>> removeLastElement(List<List<dynamic>> list) {
+  return list.map((innerList) {
+    return innerList.sublist(1,innerList.length);
+  }).toList();
+}
+List<List<dynamic>> add(List<List<dynamic>> a,List<List<dynamic>> b) {
+  List<List<dynamic>> NEWLIST = a + b;
+  Map<String,dynamic> name_list = {};
+  for (List<dynamic> NI in NEWLIST) {
+    name_list[NI[0].toString()] = NI[1];
+  }
+  List<List<dynamic>> listOfLists = name_list.entries.map((entry) => [entry.key, entry.value]).toList();
+  return listOfLists;
+}
+List<List<dynamic>> add_F(String name,List<List<dynamic>> a,List<List<dynamic>> b) {
+  List<List<dynamic>> NEWLIST = a + b;
+  Map<String,dynamic> name_list = {};
+  for (List<dynamic> NI in NEWLIST) {
+    name_list[NI[0].toString()] = NI[1];
+  }
+  List<List<dynamic>> listOfLists = name_list.entries.map((entry) => [name,entry.key, entry.value]).toList();
+  return listOfLists;
 }

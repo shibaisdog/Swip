@@ -4,7 +4,11 @@ import './Swip_controller/variable.dart' as variable;
 import './Swip_controller/print.dart' as prints;
 import './Swip_controller/Class/using.dart' as imp;
 import './Swip_controller/doing.dart' as doings;
+import 'package:swip/Interpreter/function/override.dart' as override;
 void doing(String line) {
+  if (F_FUNS.Memory.runing) {
+    override.repl(line);
+  }
   line = imp.repl(line);
   doings.repl(line);
   if (F_FUNS.Memory.define_b) {
