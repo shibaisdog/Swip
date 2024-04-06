@@ -1,5 +1,5 @@
 String repl(String line) {
-  int timestamp = DateTime.now().millisecondsSinceEpoch;
-  line = line.replaceAll("time()",timestamp.toString());
+  line = line.replaceAll("time.time()",'"'+DateTime.now().microsecondsSinceEpoch.toString()+'"');
+  line = line.replaceAll("time.now()",'"'+DateTime.now().toIso8601String()+'"');
   return line;
 }

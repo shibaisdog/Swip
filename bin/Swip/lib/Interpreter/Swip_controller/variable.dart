@@ -7,7 +7,7 @@ void repl(String text) {
   String name = (text.substring(0,text.indexOf('='))).replaceAll(" ","");
   String value = (text.substring(text.indexOf('=')+1)).trim();
   if (F_FUNS.Memory.runing) {
-    F_Heap.set(name,extractValue_var(value));
+    F_Heap.Memory.set(F_FUNS.Memory.runing_n,name,extractValue_var(value));
   } else {
     Heap.set(name,extractValue_var(value));
   }

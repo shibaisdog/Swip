@@ -1,6 +1,8 @@
 import 'package:swip/Heap/Class/function.dart' as F_Heap;
 class Memory {
   static bool runing = false;
+  static String runing_n = "";
+  static List<String> runing_L = [];
   static bool define_b = false;
   static String define_n = "";
   static List<String> define_args = [];

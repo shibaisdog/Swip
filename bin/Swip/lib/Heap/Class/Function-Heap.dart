@@ -1,53 +1,37 @@
 import 'package:swip/Heap/auto-type.dart';
 class Memory {
   static List<List<dynamic>> VM_var = [];
-}
-void set(String name,dynamic value) {
-  if (get(name) != null) {
-    int? index;
-    for (int i = 0; i < Memory.VM_var.length; i++) {
-      if (Memory.VM_var[i][0] == name) {
-        index = i;
-        break;
-      }
+  static void set(String fun_name,String name,dynamic value) {
+    final index = _getIndex(fun_name,name);
+    if (index != -1) {
+      Memory.VM_var[index][2] = auto(value);
+    } else {
+      Memory.VM_var.add([fun_name,name,auto(value)]);
     }
-    if (index != null) {
-      Memory.VM_var[index][1] = auto(value);
+  }
+  static void del(String fun_name,String target) {
+    final index = _getIndex(fun_name,target);
+    if (index != -1) {
+      Memory.VM_var.removeAt(index);
     } else {
       throw Exception("Memory Reference Error");
     }
-  } else {
-    Memory.VM_var.add([name,auto(value)]);
   }
-}
-void del(String target) {
-  int? index;
-  for (int i = 0; i < Memory.VM_var.length; i++) {
-    if (Memory.VM_var[i][0] == target) {
-      index = i;
-      break;
+  static dynamic get(String fun_name,String target) {
+    final index = _getIndex(fun_name,target);
+    return index != -1 ? Memory.VM_var[index][2] : null;
+  }
+  static int _getIndex(String fun_name, [String? name]) {
+    if (name != null) {
+      return Memory.VM_var.indexWhere((element) => element[0] == fun_name && element[1] == name);
+    } else {
+      return Memory.VM_var.indexWhere((element) => element[0] == fun_name);
     }
   }
-  if (index != null) {
-    Memory.VM_var.removeAt(index);
-  } else {
-    throw Exception("Memory Reference Error");
+  static void resetByFunName(String fun_name) {
+    final index = _getIndex(fun_name);
+    if (index != -1) {
+      Memory.VM_var.removeAt(index);
+    } else {}
   }
-}
-dynamic get(String target) {
-  int? index;
-  for (int i = 0; i < Memory.VM_var.length; i++) {
-    if (Memory.VM_var[i][0] == target) {
-      index = i;
-      break;
-    }
-  }
-  if (index != null) {
-    return Memory.VM_var[index][1];
-  } else {
-    return null;
-  }
-}
-void reset() {
-  Memory.VM_var = [];
 }
