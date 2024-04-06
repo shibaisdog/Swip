@@ -1,4 +1,4 @@
-import '../function/extractValue.dart';
+import 'package:swip/Interpreter/function/extractValue.dart';
 void repl(String text) {
   if (text.indexOf('print') < 0 ) {return;}
   String lip = (text.substring(text.indexOf('(')+1,text.indexOf(')')));
