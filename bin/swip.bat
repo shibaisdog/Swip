@@ -1,2 +1,2 @@
 @echo off
-call dart "%~dp0/Swip/bin/CLI/CLI.dart" %*
+call "%~dp0/Swip/bin/swip.exe" %*

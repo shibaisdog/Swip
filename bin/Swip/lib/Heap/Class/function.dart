@@ -45,7 +45,6 @@ dynamic run(String target,List<String> doing_args) {
     }
   }
   if (index != null) {
-    F_Heap.reset();
     F_FUNS.Memory.runing = true;
     List<String> RUNNING = (Memory.VM_var[index][1] as List<String>);
     int j = 0;
@@ -60,6 +59,7 @@ dynamic run(String target,List<String> doing_args) {
     }
     RUNNING.removeRange(0,j);
     F_FUNS.Memory.runing = false;
+    F_Heap.reset();
   } else {
     return null;
   }
