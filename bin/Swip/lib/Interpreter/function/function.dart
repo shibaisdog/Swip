@@ -6,7 +6,7 @@ class Memory {
   static bool define_b = false;
   static String define_n = "";
   static List<String> define_args = [];
-  static List<String> override = [];
+  static List<List<dynamic>> override = [];
 }
 void repl(String text) {
   if (text.indexOf('(') != -1 && text.indexOf(')') != -1 && !Memory.define_b && text.indexOf('fun') == -1 && text.indexOf('}') == -1 && text.indexOf('print') == -1) {

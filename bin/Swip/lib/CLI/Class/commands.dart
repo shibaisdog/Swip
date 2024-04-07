@@ -7,7 +7,7 @@ void version(String args) {
     args == "-version" ||
     args == "--version"
   ) {
-    print('Swip 1.0.0 at (Dart ${Platform.version})');
+    print('Swip 1.0.2 at (Dart ${Platform.version})');
     exit(0);
   }
 }

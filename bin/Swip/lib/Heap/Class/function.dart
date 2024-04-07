@@ -46,12 +46,27 @@ dynamic run(String target,List<String> doing_args) {
         F_FUNS.Memory.runing_n = valueBeforeDeleted;
       } else {}
     }
-    try {
-      if (override.override_ck(target)) {
-        Heap.Memory.VM_var = add(Heap.Memory.VM_var,removeLastElement(F_Heap.Memory.VM_var));
-        F_FUNS.Memory.override.remove(target);
+    if (override.override_ck(target)) {
+      List<dynamic> _data = override.get_data(target);
+      if (_data.isEmpty) {
+        try {
+          Heap.Memory.VM_var = add(Heap.Memory.VM_var,removeLastElement(F_Heap.Memory.VM_var));
+          F_FUNS.Memory.override.remove(target);
+        } catch (error) {}
+      } else {
+        for (String overr in _data) {
+          int overr_index = F_Heap.Memory.getIndex(target,overr);
+          if (overr_index == -1) {
+            throw Exception("Memory Reference Error");
+          } else {
+            Heap.Memory.VM_var = add(Heap.Memory.VM_var,removeLastElement([F_Heap.Memory.VM_var[overr_index]]));
+          }
+        }
+        try {
+          F_FUNS.Memory.override.remove(target);
+        } catch (error) {}
       }
-    } catch (error) {}
+    }
     F_Heap.Memory.resetByFunName(target);
   } else {
     return null;
@@ -72,14 +87,5 @@ List<List<dynamic>> add(List<List<dynamic>> a,List<List<dynamic>> b) {
     name_list[NI[0].toString()] = NI[1];
   }
   List<List<dynamic>> listOfLists = name_list.entries.map((entry) => [entry.key, entry.value]).toList();
-  return listOfLists;
-}
-List<List<dynamic>> add_F(String name,List<List<dynamic>> a,List<List<dynamic>> b) {
-  List<List<dynamic>> NEWLIST = a + b;
-  Map<String,dynamic> name_list = {};
-  for (List<dynamic> NI in NEWLIST) {
-    name_list[NI[0].toString()] = NI[1];
-  }
-  List<List<dynamic>> listOfLists = name_list.entries.map((entry) => [name,entry.key, entry.value]).toList();
   return listOfLists;
 }

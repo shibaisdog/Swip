@@ -46,9 +46,13 @@ fun <함수명>(매개변수) {
     @override
     실행할코드
 }
+fun <함수명>(매개변수) {
+    @override(매개변수)
+    실행할코드
+}
 ```
 ---
-예시입력
+예시입력 - 0
 ```
 fun run_0() {
     a = 12
@@ -74,6 +78,51 @@ null
 null
 12
 12
+```
+
+예시입력 - 1
+```
+fun work_0(a,b) {
+    print("$a $b")
+}
+fun work_1(a,b) {
+    @override(a)
+    print("$a $b")
+}
+fun work_2(a,b) {
+    @override
+    print("$a $b")
+}
+
+print("$a $b")
+
+print("---------")
+
+work_0(24,12)
+print("$a $b")
+
+print("---------")
+
+work_1(74,122)
+print("$a $b")
+
+print("---------")
+
+work_2(94,12)
+print("$a $b")
+```
+출력
+```
+null null
+---------
+24 12
+null null
+---------
+74 122
+74 null
+---------
+94 12
+94 12
 ```
 ---
 ### 03 포맷팅
